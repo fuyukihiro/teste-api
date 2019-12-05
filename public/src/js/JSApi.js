@@ -482,6 +482,9 @@ const JSCalendar = {
                 next.show();
             }
 
+            if (month > 12) { this.padoruOn(); }
+            else {
+
             const $title = $(`#api.modal .container #head.calendario h1#${month}.title`);
             const $month = $(`#api.modal .container #body.calendario div#${month}.mes`);
         
@@ -497,6 +500,7 @@ const JSCalendar = {
             console.log(swap);
             this.addClasse(swap);
             this.verificaMes(swap);
+            }
         },
 
         verificaMes: function(item) {
@@ -523,6 +527,7 @@ const JSCalendar = {
             } 
         },
 
+<<<<<<< HEAD
         controle: function() {
 
             const date = this.getDate();
@@ -536,6 +541,18 @@ const JSCalendar = {
                 data: date,
             });
             
+=======
+        padoruOn: function() {
+            
+            const dec = $("#api.modal .container #head.calendario h1#12");
+            dec.removeClass("mostra");
+            const title = $("#api.modal .container #head.calendario h1#padoru_title");
+            title.addClass("mostra");
+            const calendario = $("#api.modal .container #body.calendario div#12.mes");
+            calendario.removeClass("exibe");
+            const msg = $("#api.modal .container #body.calendario #padoru_msg");
+            msg.css("opacity", 1);
+>>>>>>> New Happy Holiday function
         }
     },
     

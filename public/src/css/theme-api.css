@@ -315,13 +315,25 @@ hr { border: 2px solid #DB2B30; border-radius: 50px; }
 #api.modal .container #agenda #reg_form #enviar { background-color: #000; color: #fff;  }
 #api.modal .container #agenda #reg_form #enviar:hover { background-color: #fff; color: #000; border: 2px solid currentColor; }
 
-/* Sucesso no envio */
-#api.modal .container #agenda #reg_form .form-btns #enviar.sucesso { 
-    width: 50%;
-    background-color: #2BDB41;
-    color: #fff;  
+/* Mensagens */
+#api.modal .container #body.calendario #padoru_msg {
+    opacity: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5rem;
 }
 
+#api.modal .container #body.calendario #padoru_msg p { margin-top: 1%; margin-bottom: 1.2%; }
+
+#api.modal .container img.img-msg {
+    width: 10rem;
+    height: 10rem;
+}
 
 /*  Sinal de correto: CSS "\002713" | JS "\u2713"
     Sinal de alerta: CSS "\0026A0" | JS "\u26A0"

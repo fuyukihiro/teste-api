@@ -15,6 +15,7 @@
     <?php foreach ($GLOBALS['meses'] as $n_of_m => $mes):?>
     <h1 id="<?=$n_of_m?>" class="title"><?=$mes?> de <?=$GLOBALS['ano']?></h1>
     <?php endforeach?>
+    <h1 id="padoru_title" class="title">Aguardando <?=($GLOBALS['ano'] + 1)?>!</h1>
 </div>
 <div id="body" class="calendario">
     <?php foreach ($GLOBALS['meses'] as $n_of_m => $mes):?>
@@ -40,9 +41,16 @@
             </div>
         </div>
     <?php endforeach?>
+<<<<<<< HEAD
     <div>
         <?php if ($padoru == true):?>
             <?php echo "Padoru Padoru!" ?>
         <?php endif?>    
+=======
+    <div id="padoru_msg">
+        <img src="./src/img/nero-claudius-padoru.png" class="img-msg" alt="Referência a Fate Grand Order, uma garota loira de olhos verdes e fofinha vestida como papai noel">
+        <p>Dezembro está chegando ao fim. Aproveite! Tenha um ótimo natal e ano novo.</p>
+        <p>Nós nos encontramos em breve!</p>
+>>>>>>> New Happy Holiday function
     </div>
 </div>
