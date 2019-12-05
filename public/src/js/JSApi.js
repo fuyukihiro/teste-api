@@ -404,39 +404,45 @@ const JSCalendar = {
             const mes = date.getMonth() + 1;
             const hoje = date.getDate();
             const ano = date.getFullYear();
+    
+            ClickDate.year = ano;
+            ClickDate.month = mes;
 
-            const now = {
+            JSCalendar.var.now = {
                 year: ano,
                 month: mes,
                 today: hoje
             }
 
-            return now;
+            return JSCalendar.var.now;
     
         },
         
-        apontaItens: function(date) {
+        apontaItens: function() {
             console.log("Identificando itens correspondentes...");
+            const date = JSCalendar.fun.getDate();
             const { month, today } = date;
 
             const $title = $(`#api.modal .container #head.calendario h1#${month}.title`);
             const $month = $(`#api.modal .container #body.calendario div#${month}.mes`);
             const $today = $month.find(`.dias-do-mes div#${today}.dia`);
 
-            const elements = {
+            JSCalendar.var.toElement = {
                 $title,
                 $month,
                 $today
             }
+
+            const elements = JSCalendar.var.toElement;
+
+            this.addClasse(elements);
+            this.verificaMes(elements);
             return elements;
         },
 
         addClasse: function(items) {
             console.log("Adicionando classes...");
             const { $title, $month, $today } = items;
-
-            console.log($title, $month, $today);
-            
             // others:
             const $titles = $("#api.modal .container #head.calendario h1.title");
             const $months = $("#api.modal .container #body.calendario .mes");
@@ -466,6 +472,7 @@ const JSCalendar = {
             prev.on('click', () => this.exibir(0));
 
         },
+
 
         exibir: function(click) {
             var { month } = this.getDate();
@@ -527,21 +534,6 @@ const JSCalendar = {
             } 
         },
 
-<<<<<<< HEAD
-        controle: function() {
-
-            const date = this.getDate();
-            
-            console.log("Padoru é:",padoru);
-
-            // Verificando se é dezembro
-            $.ajax({
-                method: "POST",
-                url: "src/ajax/padoru.php",
-                data: date,
-            });
-            
-=======
         padoruOn: function() {
             
             const dec = $("#api.modal .container #head.calendario h1#12");
@@ -552,13 +544,14 @@ const JSCalendar = {
             calendario.removeClass("exibe");
             const msg = $("#api.modal .container #body.calendario #padoru_msg");
             msg.css("opacity", 1);
->>>>>>> New Happy Holiday function
         }
     },
     
     init: function() {
         const fun = JSCalendar.fun;
-        fun.controle();
+        fun.apontaItens();
+        fun.clicks();
+
         return console.log("Calendário iniciado :3");
     }
 }

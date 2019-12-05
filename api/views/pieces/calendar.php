@@ -41,16 +41,9 @@
             </div>
         </div>
     <?php endforeach?>
-<<<<<<< HEAD
-    <div>
-        <?php if ($padoru == true):?>
-            <?php echo "Padoru Padoru!" ?>
-        <?php endif?>    
-=======
     <div id="padoru_msg">
         <img src="./src/img/nero-claudius-padoru.png" class="img-msg" alt="Referência a Fate Grand Order, uma garota loira de olhos verdes e fofinha vestida como papai noel">
         <p>Dezembro está chegando ao fim. Aproveite! Tenha um ótimo natal e ano novo.</p>
         <p>Nós nos encontramos em breve!</p>
->>>>>>> New Happy Holiday function
     </div>
 </div>
