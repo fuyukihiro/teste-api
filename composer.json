@@ -1,12 +1,12 @@
 {
-    "name": "yuuta/api-calendar",
+    "name": "YuutaHiroshi/teste-api",
     "description": "Testando o calend\u0000rio agora com conex\u0000o e ajax",
     "type": "project",
     "license": "proprietary",
     "authors": [
         {
             "name": "Yuuta Fuyuki",
-            "email": "kyochi.softwares@gmail.com"
+            "email": "samuel.banguela2015@gmail.com"
         }
     ],
     "minimum-stability": "dev",
