@@ -1,0 +1,328 @@
+/* Modal */
+#api.modal {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    /* z-index: 50; */
+    background-color: rgba(0, 0, 0, 0.65);
+
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    will-change: transform, opacity;
+    pointer-events: none;
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+
+  -webkit-transition:
+    -webkit-transform 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946),
+    opacity 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+
+  transition:
+    transform 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946),
+    opacity 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+
+}
+
+#api.modal.visivel {
+    pointer-events: auto;
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+
+    -webkit-transition:
+        -webkit-transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946),
+        opacity 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+
+    transition:
+        transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946),
+        opacity 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+}
+
+/* Container */
+#api.modal .container {
+    
+    width: 85%;
+    height: 85%;
+    
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-rows: 15% 85%;
+    grid-template-areas: "agenda titulo"
+                         "agenda calendario";
+
+    column-gap: 10px;
+    
+    position: relative;
+}
+
+#api.modal .container #fechar-api {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: #fff;
+    transition: all .45s ease-in-out;
+    will-change: transform, color;
+}
+
+#api.modal .container #fechar-api:hover { pointer-events: auto; color: #000; transform: rotate(360deg); }
+
+/* Cabeçalho do calendário (titulo) */
+#api.modal .container #head.calendario {
+    grid-area: titulo;
+    background-color: #DB2B30;
+    color: #fff;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#api.modal .container #head.calendario .title { display: none; }
+#api.modal .container #head.calendario .mostra { order: 2; display: inline-block; text-align: center; }
+#api.modal .container #head.calendario .mostra:nth-child(3) { order: 2; }
+
+/* Corpo do calendário (Meses, dias e etc) */
+#api.modal .container #body.calendario {
+    grid-area: calendario;
+    background-color: #fff;
+    padding: 1rem;
+}
+
+#api.modal .container #body.calendario .mes {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+#api.modal .container #body.calendario .mes.exibe {
+    display: grid;
+    grid-template: (20% 80%) / 100%;
+}
+
+#api.modal .container #body.calendario .mes .dias-da-semana {
+    grid-row: 1/2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+#api.modal .container #body.calendario .mes .dias-do-mes {
+    grid-row: 2/3;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+/* dias da semanas e dias do mês (incluindo divs vazias) */
+#api.modal .container #body.calendario .mes .dias-da-semana .dia, 
+#api.modal .container #body.calendario .mes .dias-do-mes .dia, 
+#api.modal .container #body.calendario .mes .dias-do-mes .pula {
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+#api.modal .container #body.calendario .mes .dias-da-semana .dia > p, 
+#api.modal .container #body.calendario .mes .dias-do-mes .dia > p, 
+#api.modal .container #body.calendario .mes .dias-do-mes .pula > p {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-right: 15%;
+    font-size: 1.5rem;
+}
+/* Styles únicos: */
+#api.modal .container #body.calendario .mes .dias-da-semana .dia > p { font-weight: bold; }
+#api.modal .container #body.calendario .mes .dias-do-mes .dia.hoje { background-color: #DB2B30; color: #fff; border-radius: 5px; }
+#api.modal .container #body.calendario .mes .dias-do-mes .selected { border: 2px solid #000; border-left-width: 3.5px; border-radius: 5px; cursor: pointer; }
+#api.modal .container #body.calendario .mes .dias-do-mes .dia:hover { border: 2px solid rgba(0, 0, 0, 0.5); border-radius: 5px; cursor: pointer; }
+
+/* Setas */
+.base { display: none; }
+#api.modal .container #head.calendario #vai, #api.modal .container #head #volta { cursor: pointer; margin: 15px; }
+
+#api.modal .container #head.calendario #vai:nth-child(2) { order: 3; }
+#api.modal .container #head.calendario #volta:nth-child(1) { order: 1; }
+
+.setas {width: 50px; height: 50px;}
+.seta {
+    fill: none;
+    stroke: white;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3;
+    pointer-events: visibleStroke;
+}
+
+#api.modal .container #head.calendario .seta-anterior { transform: rotate(90deg); }
+#api.modal .container #head.calendario .seta-proximo { transform: rotate(-90deg); }
+
+#api.modal .container #head.calendario .seta-anterior:hover { stroke: #000; }
+#api.modal .container #head.calendario .seta-proximo:hover{ stroke: #000; }
+
+/* Agenda */
+#api.modal .container #agenda {
+    grid-area: agenda; 
+    background-color: #f2f2f2; 
+    text-align: center;
+
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+hr { border: 2px solid #DB2B30; border-radius: 50px; }
+
+/* Configuração de exibição de telas */
+#api.modal .container #agenda div.exibindo {
+    padding: 1.3rem;
+    height: 85%;
+    font-size: 1.2rem; 
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Tela 01 */
+#api.modal .container #agenda > #welcome { display: none; }
+
+#api.modal .container #agenda > #welcome.exibindo { display: flex; }
+
+#api.modal .container #agenda > #welcome p { margin: 0; padding: 0; }
+
+/* Tela 02.1 */
+#api.modal .container #agenda > #no_reg { display: none; }
+
+#api.modal .container #agenda > #no_reg.exibindo { display: flex; }
+
+#api.modal .container #agenda #no_reg > p { margin: 0; padding: 0; }
+
+#api.modal .container #agenda #no_reg div.reg-btns button.btn {
+    font-size: 2rem;
+    width: 15%;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+}
+#api.modal .container #agenda #no_reg .reg-btns button#reg-add { background-color: darkcyan; margin-top: 1%; }
+#api.modal .container #agenda #no_reg .reg-btns button#reg-add:hover { background-color: #fff; color: darkcyan; border: 2px solid currentColor;}
+
+/* Tela 02.2 */
+#api.modal .container #agenda > #list_reg { display: none; }
+
+#api.modal .container #agenda > #list_reg.exibindo { display: flex; position: relative;}
+
+#api.modal .container #agenda #list_reg > p { margin: 0; padding: 0; }
+
+#api.modal .container #agenda #list_reg div.reg-btns {
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+}
+
+#api.modal .container #agenda #list_reg div.reg-btns button.btn {
+    font-size: 2rem;
+    width: 15%;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+}
+#api.modal .container #agenda #list_reg .reg-btns button#reg-add { background-color: darkcyan; margin-top: 1%; }
+#api.modal .container #agenda #list_reg .reg-btns button#reg-add:hover { background-color: #fff; color: darkcyan; border: 2px solid currentColor;}
+
+/* Estilo da tabela */
+
+#api.modal .container #agenda #list_reg table { width: 100%; margin-top: 1%; }
+#api.modal .container #agenda #list_reg th { border-bottom: 2px solid #000; }
+#api.modal .container #agenda #list_reg td { text-align: center; }
+
+/* Tela 03 */
+#api.modal .container #agenda #reg_form { display: none; }
+
+#api.modal .container #agenda #reg_form.exibindo { display: flex; }
+
+#api.modal .container #agenda #reg_form .formOp { margin: 3.5% 5%; }
+#api.modal .container #agenda #reg_form label { font-size: 1.2rem; float: left; }
+
+#api.modal .container #agenda #reg_form .select {
+    width: 100%;
+    height: 50%;
+    background-color: transparent;
+    border: transparent;
+    border-bottom: 2px solid #000;
+    font-size: 1.2rem;
+    
+}
+
+#api.modal .container #agenda #reg_form textarea[name=reg_notes] {
+    
+    padding-top: 2%;;
+    width: 100%;
+    background-color: transparent;
+    border: transparent;
+    border-bottom: 2px solid #000;
+    font-size: 1rem;
+    font-family: 'Century Gothic';
+    outline: none;
+    resize: none;
+}
+
+#api.modal .container #agenda .form-btns {
+    width: 100%;
+    height: 15%;
+    margin: 5% 0%;
+}
+
+#api.modal .container #agenda #reg_form .btn {
+    width: 25%;
+    border: none;
+    padding: 3.5%;
+    margin: 0% 10%;
+    font-size: 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+}
+
+#api.modal .container #agenda #reg_form #cancelar { background-color: #DB2B30; color: #fff;   }
+#api.modal .container #agenda #reg_form #cancelar:hover { background-color: #fff; color: #DB2B30; border: 2px solid currentColor; }
+
+#api.modal .container #agenda #reg_form #enviar { background-color: #000; color: #fff;  }
+#api.modal .container #agenda #reg_form #enviar:hover { background-color: #fff; color: #000; border: 2px solid currentColor; }
+
+/* Sucesso no envio */
+#api.modal .container #agenda #reg_form .form-btns #enviar.sucesso { 
+    width: 50%;
+    background-color: #2BDB41;
+    color: #fff;  
+}
+
+
+/*  Sinal de correto: CSS "\002713" | JS "\u2713"
+    Sinal de alerta: CSS "\0026A0" | JS "\u26A0"
+*/

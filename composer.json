@@ -1,0 +1,24 @@
+{
+    "name": "yuuta/api-calendar",
+    "description": "Testando o calend\u0000rio agora com conex\u0000o e ajax",
+    "type": "project",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Yuuta Fuyuki",
+            "email": "kyochi.softwares@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "autoload": {
+        "psr-4": {
+            "api\\": "api"
+        }
+    },
+    "require": {
+        "php": "^7.3"
+    }
+}
