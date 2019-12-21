@@ -57,7 +57,6 @@ function search_diaDaSemana() {
     $diasDentroMes = qtd_diasMeses();
     $diasNaSemana = [];
     // Vai retornar em qual dia da semana é cada dia do mês. Ex. Dia 23 é Segunda-feira
-
     for($i_mes = 1; $i_mes <= 12; $i_mes++) {
         $diasNaSemana[$i_mes] = [];
         //Em cada mês adiciona um array vazio
@@ -76,9 +75,4 @@ function search_diaDaSemana() {
         // No array vazio, adiciona-se o tanto de dias que aquele mês tem
     }
     return $diasNaSemana;
-}
-
-function adiciona0($n_mes) {
-// Se o mês for menor que 10 ele adiciona o 0 antes, caso contrario fica normal
-    return ($n_mes < 10) ? '0'.$n_mes : $n_mes;
 }
