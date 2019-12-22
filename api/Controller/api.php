@@ -17,6 +17,7 @@ $calendar = new Piece;
 
 // Tratando Calendario
 require_once('src/php/calendar.php');
+require_once('src/ajax/padoru.php');
 $diasNaSemana = search_diaDaSemana();
 $calendar->add('calendar');
 

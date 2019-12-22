@@ -40,4 +40,9 @@
             </div>
         </div>
     <?php endforeach?>
+    <div>
+        <?php if ($padoru == true):?>
+            <?php echo "Padoru Padoru!" ?>
+        <?php endif?>    
+    </div>
 </div>
