@@ -13,4 +13,9 @@ class Layout {
     public function load() {
         return "../api/views/{$this->view}.php";
     }
+
+    public function master($master)
+    {
+        return "../api/views/{$master}.php";
+    }
 }
