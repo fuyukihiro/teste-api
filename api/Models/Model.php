@@ -49,4 +49,18 @@ abstract class Model {
 
         return $stmt_del->rowCount();
     }
+
+    // Apenas para o sistema de Login
+    public function find_user($field1, $field2, $user, $pass) {
+
+    $sql = "SELECT * FROM {$this->table} WHERE {$field1} = ? AND {$field2} = ?";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $user);
+        $stmt->bindValue(2, $pass);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
 }
+

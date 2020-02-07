@@ -7,6 +7,8 @@ use api\classes\Routes;
 
 $routes = [
     '/' => 'Controller/login',
+    '/welcome' => 'Controller/welcome',
+    '/logout' => 'Controller/logout',
 ];
 
 $uri = Uri::load();

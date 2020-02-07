@@ -8,6 +8,18 @@ const ClickDate = {
 const JSApi = () => {
     JSCalendar.init();
     JSAgenda.fun.changeDisplay();
+
+    console.log("Fazendo requisição de usuário...");
+        const request = $.ajax({
+            method: "GET",
+            url: "src/ajax/getUser.php",
+            dataType: "JSON"
+        });
+        request.done((resposta) => { 
+            JSAgenda.var.user = resposta;
+            console.log("Usuário é", JSAgenda.var.user.id);
+        });
+
     JSAgenda.fun.form.enviar();
 }
 
@@ -60,6 +72,8 @@ const JSAgenda = {
         list: {
             body: document.querySelector("#api.modal .container #agenda #list_reg table tbody"),
         },
+
+        user: {}
     },
 
     fun: {
@@ -271,13 +285,14 @@ const JSAgenda = {
                 } else {
                     
                     console.log("Verificando antes de enviar...");
-                    
+
                     const { sala, material, hora, note } = campos;
                     const stringDate = `${ClickDate.year}-${ClickDate.month}-${ClickDate.day}`;
+                    const user_id = JSAgenda.var.user.id;
 
                     let dados = {
-                            
-                        user_fk: Number('9'),
+                        // Para enviar no momento da reserva;
+                        user_fk: Number(user_id),
                         sala_fk: Number(sala.value),
                         mat_fk: Number(material.value),
                         reg_date: stringDate,
@@ -553,5 +568,43 @@ const JSCalendar = {
         fun.clicks();
 
         return console.log("Calendário iniciado :3");
+    }
+}
+
+// Somente para testes
+const Logar = () => {
+    // Inputs de Login
+    const in_user = document.querySelector("div#login-box form#login input[name=user_name]");
+    const in_pass = document.querySelector("div#login-box form#login input[name=user_password]");
+    const dados = {
+        user: in_user.value,
+        password: in_pass.value
+    }
+
+    return dados;
+}
+
+const form_login = document.querySelector("div#login-box form#login");
+
+if (form_login !== null) {
+
+    form_login.onsubmit = (event) => {
+        
+        event.preventDefault();
+        const dados = Logar();
+        
+        const request = $.ajax({
+            method: "POST",
+            url: "src/ajax/login.php",
+            data: dados,
+            dataType: "JSON"
+        });
+
+        request.done(location.assign("/welcome"));
+        
+        request.fail((jqXHR, textStatus ) => {
+            console.log("Deu erro: " + textStatus);
+        });    
+    
     }
 }
